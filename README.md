@@ -18,8 +18,7 @@ from model import Message
 def process_my_message(session: MessagingSession, message: Message):
     # TODO: here's where you do stuff with the message
 
-def start_sample_listener():
-    start_receiving_messages('myTopic', process_my_message)
+start_receiving_messages('myTopic', process_my_message)
 ```
 
 ## I want to send messages. How do I do it?
@@ -46,6 +45,5 @@ def process_my_message(session: MessagingSession, message: Message):
     my_message = {"yin": "yang"}
     session.send_message('myOtherTopic', my_message)
 
-def start_sample_listener():
-    start_receiving_messages('myTopic', process_my_message)
+start_receiving_messages('myTopic', process_my_message)
 ```
