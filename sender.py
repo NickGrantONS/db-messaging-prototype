@@ -38,6 +38,7 @@ def send_receipt():
 
 
 if __name__ == '__main__':
-    send_sample()
+    for i in range(1, 1000):
+        send_sample()
 
     # send_receipt()
