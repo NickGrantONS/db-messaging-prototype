@@ -13,21 +13,6 @@ DATABASE_URL = os.getenv('DATABASE_URL', 'postgresql://postgres:postgres@localho
 engine = create_engine(DATABASE_URL, pool_size=20, max_overflow=0)
 
 
-# noinspection PyBroadException
-def start_receiving_messages(topic: str, callback: Callable):
-    while True:
-        try:
-            with MessagingSession() as session:
-                message = session.receive_message(topic)
-
-                if message:
-                    callback(session, message)
-                else:
-                    sleep(1 / 10)  # no messages, so wait 100ms before checking for another message
-        except Exception:
-            print(f'Error processing message: {sys.exc_info()[0]}')
-
-
 class MessagingSession:
     def __init__(self):
         self.Session = sessionmaker(engine)
@@ -71,3 +56,18 @@ class MessagingSession:
 
     def find_case(self, case_id: str) -> Case:
         return self.session.query(Case).get(case_id)
+
+
+# noinspection PyBroadException
+def start_receiving_messages(topic: str, callback: Callable[[MessagingSession, Message], None]):
+    while True:
+        try:
+            with MessagingSession() as session:
+                message = session.receive_message(topic)
+
+                if message:
+                    callback(session, message)
+                else:
+                    sleep(1 / 10)  # no messages, so wait 100ms before checking for another message
+        except Exception:
+            print(f'Error processing message: {sys.exc_info()[0]}')
