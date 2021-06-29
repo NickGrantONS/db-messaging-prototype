@@ -14,7 +14,8 @@ def send_sample():
             }
         }
 
-        session.send_message('sampleLoader.caseProcessor.sample', sample)
+        for i in range(1, 1000):
+            session.send_message('sampleLoader.caseProcessor.sample', sample)
 
 
 def send_receipt():
@@ -38,7 +39,6 @@ def send_receipt():
 
 
 if __name__ == '__main__':
-    for i in range(1, 1000):
-        send_sample()
+    send_sample()
 
     # send_receipt()

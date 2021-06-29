@@ -51,7 +51,15 @@ if __name__ == '__main__':
     process_manager = multiprocessing.Manager()
     daemons = [
         multiprocessing.Process(target=start_sample_listener, daemon=True),
-        multiprocessing.Process(target=start_receipt_listener, daemon=True)
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
+        multiprocessing.Process(target=start_sample_listener, daemon=True),
     ]
 
     for daemon in daemons:
