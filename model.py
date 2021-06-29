@@ -17,7 +17,7 @@ class Message(Base):
     id = Column('id', UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     topic = Column('topic', String(255), index=True)
     payload = Column('payload', JSON)
-    do_not_process_until = Column('do_not_process_until', DateTime)
+    do_not_process_until = Column('do_not_process_until', DateTime, index=True)
 
     def __repr__(self):
         return (f"Message(id={self.id!r}, topic={self.topic!r}, payload={self.payload!r}"
